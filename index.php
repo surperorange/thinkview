@@ -8,6 +8,9 @@ define('APP_DEBUG', true);
 // 加载框架文件
 require(APP_PATH . 'thinkview/Thinkview.php');
 
+// 加载Autoload
+require_once './vendor/autoload.php';
+
 // 加载配置文件
 $config = require(APP_PATH . 'config/config.php');
 
