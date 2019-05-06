@@ -1,6 +1,8 @@
 <?php
 namespace thinkview;
 
+use Config;
+
 // 框架根目录
 defined('CORE_PATH') or define('CORE_PATH', __DIR__);
 
@@ -22,9 +24,9 @@ class Thinkview
     {
         spl_autoload_register(array($this, 'loadClass'));
         $this->setReporting();
+        $this->TplEngineConfig();
         $this->removeMagicQuotes();
         $this->unregisterGlobals();
-        //$this->setDbConfig();
         $this->route();
     }
 
@@ -129,17 +131,6 @@ class Thinkview
         }
     }
 
-    // 配置数据库信息
-    public function setDbConfig()
-    {
-        if ($this->config['db']) {
-            define('DB_HOST', $this->config['db']['host']);
-            define('DB_NAME', $this->config['db']['dbname']);
-            define('DB_USER', $this->config['db']['username']);
-            define('DB_PASS', $this->config['db']['password']);
-        }
-    }
-
     // 自动加载类
     public function loadClass($className)
     {
@@ -167,11 +158,15 @@ class Thinkview
     protected function classMap()
     {
         return [
-            'fastphp\base\Controller' => CORE_PATH . '/base/Controller.php',
-            'fastphp\base\Model' => CORE_PATH . '/base/Model.php',
-            'fastphp\base\View' => CORE_PATH . '/base/View.php',
-            'fastphp\db\Db' => CORE_PATH . '/db/Db.php',
-            'fastphp\db\Sql' => CORE_PATH . '/db/Sql.php',
+            'thinkview\base\Controller' => CORE_PATH . '/base/Controller.php',
+            'thinkview\base\View' => CORE_PATH . '/base/View.php'
         ];
+    }
+
+    //配置模板引擎
+    protected function TplEngineConfig(){
+        if ($this->config['template_engine']) {
+            define('TPL_ENGINE', $this->config['template_engine']);
+        }
     }
 }

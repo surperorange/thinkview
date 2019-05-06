@@ -18,15 +18,9 @@ class Controller
         $this->_view = new View($controller, $action);
     }
 
-    // 分配变量
-    public function assign($name, $value)
-    {
-        $this->_view->assign($name, $value);
-    }
-
     // 渲染视图
-    public function render()
+    public function render($variables = [])
     {
-        $this->_view->render();
+        $this->_view->render($variables);
     }
 }
