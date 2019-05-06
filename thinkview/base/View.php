@@ -60,7 +60,7 @@ class View
                 }
                 break;
             default:
-                extract($this->variables);
+                extract($variables);
                 $defaultHeader = APP_PATH . 'app/views/header.php';
                 $defaultFooter = APP_PATH . 'app/views/footer.php';
 
